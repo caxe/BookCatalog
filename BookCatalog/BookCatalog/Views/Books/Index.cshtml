@@ -1,0 +1,64 @@
+﻿@model IEnumerable<BookCatalog.Models.Book>
+
+@{
+    ViewBag.Title = "Books";
+}
+
+<h2>Books</h2>
+@if (User.Identity.IsAuthenticated)
+{
+	<p>
+		@Html.ActionLink("Create New", "Create")
+	</p>
+}
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.Title)
+		</th>
+		<th>
+			Author
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Genre.GenreName)
+		</th>
+        
+		<th>
+			@Html.DisplayNameFor(model => model.ReleaseDate)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Description)
+		</th>
+		<th></th>
+	</tr>
+	
+	@foreach (var item in Model) {
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Title)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Author.FirstName)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Genre.GenreName)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.ReleaseDate)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Description)
+			</td>
+			<td>
+				@if (User.Identity.IsAuthenticated)
+				{
+					@Html.ActionLink("Edit", "Edit", new { id=item.BookId }) <span>|</span>
+					@Html.ActionLink("Details", "Details", new { id=item.BookId }) <span>|</span>
+					@Html.ActionLink("Delete", "Delete", new { id=item.BookId })
+				}
+			</td>
+		</tr>
+	}
+
+</table>

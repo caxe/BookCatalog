@@ -10,7 +10,7 @@ namespace BookCatalog.Controllers
 	{
 		public ActionResult Index()
 		{
-			return View();
+			return RedirectToAction("Index", "Books");
 		}
 
 		public ActionResult About()
